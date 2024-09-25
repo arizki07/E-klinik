@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\_00_Home\UsersController;
 use App\Http\Controllers\Auth\AuthController;
 use App\Http\Controllers\Auth\ForgotController;
 use App\Http\Controllers\Auth\RegisterController;
@@ -29,5 +30,9 @@ Route::controller(ForgotController::class)->group(function () {
 Route::middleware('auth')->group(function () {
     Route::controller(DashboardController::class)->group(function () {
         Route::get('dashboard', 'index');
+    });
+
+    Route::controller(UsersController::class)->group(function () {
+        Route::get('users', 'index');
     });
 });
