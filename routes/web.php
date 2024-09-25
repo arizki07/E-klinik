@@ -8,18 +8,23 @@ use Illuminate\Support\Facades\Route;
 
 Route::controller(AuthController::class)->group(function () {
     Route::get('/', 'index');
+    Route::post('login', 'authenticate')->name('log.authenticate');
+    Route::get('logout', 'logout');
 });
 
 Route::controller(RegisterController::class)->group(function () {
     Route::get('register', 'index')->name('register');
-    Route::get('verify-email', 'verifyEmail')->name('verification.verify');
-    Route::post('resgiter/post', 'register')->name('register.post');
+    Route::get('otps', 'otp')->name('otp.form');
+    Route::post('register/action', 'actionRegist')->name('actionregister');
+    Route::post('/otp/verify', 'verifyOtp')->name('otp.verify');
 });
 
 Route::controller(ForgotController::class)->group(function () {
     Route::get('forgot', 'index');
 });
 
-Route::controller(DashboardController::class)->group(function () {
-    Route::get('dashboard', 'index');
+Route::middleware('auth')->group(function () {
+    Route::controller(DashboardController::class)->group(function () {
+        Route::get('dashboard', 'index');
+    });
 });

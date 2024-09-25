@@ -34,30 +34,43 @@
                                 <div class="col-md-7 d-flex flex-center">
                                     <div class="p-4 p-md-5 flex-grow-1">
                                         <h3>Register</h3>
-                                        <form id="register-form">
+                                        @if (session('success'))
+                                            <div class="alert alert-success" role="alert">
+                                                {{ session('success') }}
+                                            </div>
+                                        @endif
+
+                                        @if (session('error'))
+                                            <div class="alert alert-danger" role="alert">
+                                                {{ session('error') }}
+                                            </div>
+                                        @endif
+
+                                        <form action="{{ route('actionregister') }}" method="POST">
                                             @csrf
                                             <div class="mb-3">
                                                 <label class="form-label" for="card-name">Name</label>
                                                 <input class="form-control" type="text" autocomplete="on"
-                                                    id="card-name" />
+                                                    name="name" />
                                             </div>
                                             <div class="mb-3">
                                                 <label class="form-label" for="card-email">Email address</label>
                                                 <input class="form-control" type="email" autocomplete="on"
-                                                    id="card-email" />
+                                                    name="email" />
                                             </div>
                                             <div class="row gx-2">
                                                 <div class="mb-3 col-sm-6">
                                                     <label class="form-label" for="card-password">Password</label>
                                                     <input class="form-control" type="password" autocomplete="on"
-                                                        id="card-password" />
+                                                        name="password" />
                                                 </div>
                                                 <div class="mb-3 col-sm-6">
                                                     <label class="form-label" for="card-confirm-password">Confirm
                                                         Password</label>
-                                                    <input class="form-control" type="password" autocomplete="on"
-                                                        id="card-confirm-password" />
+                                                    <input class="form-control" type="password"
+                                                        name="password_confirmation" />
                                                 </div>
+
                                             </div>
                                             <div class="form-check">
                                                 <input class="form-check-input" type="checkbox"
@@ -94,38 +107,4 @@
             </div>
         </div>
     </main>
-
-    <script>
-        $(document).ready(function() {
-            $('form').on('submit', function(e) {
-                e.preventDefault();
-
-                let name = $('#card-name').val();
-                let email = $('#card-email').val();
-                let password = $('#card-password').val();
-                let password_confirmation = $('#card-confirm-password').val();
-
-                $.ajax({
-                    url: '{{ route('register.post') }}',
-                    type: 'POST',
-                    data: {
-                        _token: '{{ csrf_token() }}',
-                        name: name,
-                        email: email,
-                        password: password,
-                        password_confirmation: password_confirmation
-                    },
-                    success: function(response) {
-                        alert(response.message);
-                    },
-                    error: function(xhr) {
-                        let errors = xhr.responseJSON.errors;
-                        for (let key in errors) {
-                            alert(errors[key][0]); // Menampilkan pesan error
-                        }
-                    }
-                });
-            });
-        });
-    </script>
 @endsection

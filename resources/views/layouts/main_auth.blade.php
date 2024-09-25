@@ -3,7 +3,6 @@
 @include('layouts.head_auth')
 
 <body>
-    @include('layouts.script_auth')
 
     <!-- ===============================================-->
     <!--    Main Content-->
@@ -20,6 +19,7 @@
     <!-- ===============================================-->
     <!--    JavaScripts-->
     <!-- ===============================================-->
+    @include('layouts.script_auth')
 
 </body>
 

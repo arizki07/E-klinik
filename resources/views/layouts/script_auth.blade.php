@@ -1,4 +1,3 @@
-<script src="{{ asset('asset/public/jquery-3.7.1.min.js') }}"></script>
 <script src="asset/public/vendors/popper/popper.min.js"></script>
 <script src="asset/public/vendors/bootstrap/bootstrap.min.js"></script>
 <script src="asset/public/vendors/anchorjs/anchor.min.js"></script>

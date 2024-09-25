@@ -313,7 +313,7 @@
 
                     <div class="dropdown-divider"></div>
                     <a class="dropdown-item" href="pages/user/settings.html">Settings</a>
-                    <a class="dropdown-item" href="pages/authentication/card/logout.html">Logout</a>
+                    <a class="dropdown-item" href="{{ url('logout') }}">Logout</a>
                 </div>
             </div>
         </li>

@@ -44,22 +44,43 @@
                                                 <h3>Account Login</h3>
                                             </div>
                                         </div>
-                                        <form>
+                                        @if (session('success'))
+                                            <div class="alert alert-success" role="alert">
+                                                {{ session('success') }}
+                                            </div>
+                                        @endif
+
+                                        @if (session('error'))
+                                            <div class="alert alert-danger" role="alert">
+                                                {{ session('error') }}
+                                            </div>
+                                        @endif
+                                        <form action="{{ route('log.authenticate') }}" method="post" name="handleAjax"
+                                            id="handleAjax">
+                                            @csrf
                                             <div class="mb-3">
                                                 <label class="form-label" for="card-email">Email address</label>
-                                                <input class="form-control" id="card-email" type="email" />
+                                                <input type="text" name="email" id="email" class="form-control"
+                                                    placeholder="Masukkan Email" autofocus="true">
+                                                @if ($errors->has('email'))
+                                                    <span class="text-danger">{{ $errors->first('email') }}</span>
+                                                @endif
                                             </div>
                                             <div class="mb-3">
                                                 <div class="d-flex justify-content-between">
                                                     <label class="form-label" for="card-password">Password</label>
                                                 </div>
-                                                <input class="form-control" id="card-password" type="password" />
+                                                <input type="password" name="password" id="password" class="form-control"
+                                                    placeholder="Masukkan password">
+                                                @if ($errors->has('password'))
+                                                    <span class="text-danger">{{ $errors->first('password') }}</span>
+                                                @endif
                                             </div>
                                             <div class="row flex-between-center">
                                                 <div class="col-auto">
                                                     <div class="form-check mb-0">
-                                                        <input class="form-check-input" type="checkbox" id="card-checkbox"
-                                                            checked="checked" />
+                                                        <input class="form-check-input" type="checkbox" name="remember"
+                                                            id="card-checkbox" checked="checked" />
                                                         <label class="form-check-label mb-0" for="card-checkbox">Remember
                                                             me</label>
                                                     </div>
@@ -69,7 +90,7 @@
                                             </div>
                                             <div class="mb-3">
                                                 <button class="btn btn-primary d-block w-100 mt-3" type="submit"
-                                                    name="submit">Log in</button>
+                                                    id="submitLogin">Log in</button>
                                             </div>
                                         </form>
                                         <div class="position-relative mt-4">
@@ -94,4 +115,85 @@
             </div>
         </div>
     </main>
+    <script src="{{ asset('asset/public/jquery-3.7.1.min.js') }}"></script>
+    <script src="{{ asset('asset/public/jquery.validate.min.js') }}"></script>
+    <script type="text/javascript">
+        $(function() {
+            /*------------------------------------------==============================================================================================================================================================
+            --------------------------------------------==============================================================================================================================================================
+            Ajax Login
+            --------------------------------------------==============================================================================================================================================================
+            --------------------------------------------==============================================================================================================================================================*/
+
+            if ($("#handleAjax").length > 0) {
+                $("#handleAjax").validate({
+                    rules: {
+                        email: {
+                            required: true,
+                        },
+                        password: {
+                            required: true,
+                        },
+                    },
+                    messages: {
+                        email: {
+                            required: "Email tidak boleh kosong",
+                        },
+                        password: {
+                            required: "Password tidak boleh kosong",
+                        },
+                    },
+
+                    submitHandler: function(form) {
+
+                        $('#submitLogin').html(
+                            '<span class="spinner-border spinner-border-sm me-2" role="status"></span> Please Wait<span class="animated-dots"></span>'
+                        );
+                        $("#submitLogin").attr("disabled", true);
+
+
+                        $.ajax({
+                            url: $(form).attr('action'),
+                            data: $(form).serialize(),
+                            type: "POST",
+                            dataType: 'json',
+
+                            success: function(data) {
+
+                                if (data.status) {
+                                    $('#submitLogin').html(
+                                        '<span class="spinner-border spinner-border-sm me-2" role="status"></span> Redirect to Dashboard<span class="animated-dots"></span>'
+                                    );
+                                    window.location = data.redirect;
+                                } else {
+
+                                    $('#submitLogin').html('Login');
+                                    $("#submitLogin").attr("disabled", false);
+                                    $('#email').focus();
+
+                                    $(".alert").remove();
+                                    $.each(data.errors, function(key, val) {
+                                        $("#errors-list").append(
+                                            "<div class='alert  alert-danger alert-dismissible' role='alert'><div class='d-flex'><div><svg xmlns='http://www.w3.org/2000/svg' class='icon alert-icon' width='24' height='24' viewBox='0 0 24 24' stroke-width='2' stroke='currentColor' fill='none' stroke-linecap='round' stroke-linejoin='round'><path stroke='none' d='M0 0h24v24H0z' fill='none'></path><path d='M3 12a9 9 0 1 0 18 0a9 9 0 0 0 -18 0'></path><path d='M12 8v4'></path><path d='M12 16h.01'></path></svg></div><div><h4 class='alert-title'>" +
+                                            data.header +
+                                            "</h4><div class='text-secondary'>" +
+                                            val +
+                                            "</div></div></div><a class='btn-close' data-bs-dismiss='alert' aria-label='close'></a></div>"
+                                        );
+                                    });
+                                }
+
+                            },
+                        });
+                    }
+                })
+            }
+
+            /*------------------------------------------==============================================================================================================================================================
+            --------------------------------------------==============================================================================================================================================================
+            End Ajax
+            --------------------------------------------==============================================================================================================================================================
+            --------------------------------------------==============================================================================================================================================================*/
+        });
+    </script>
 @endsection
