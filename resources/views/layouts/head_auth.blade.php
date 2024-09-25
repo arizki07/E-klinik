@@ -13,15 +13,18 @@
     <!-- ===============================================-->
     <!--    Favicons-->
     <!-- ===============================================-->
-    <link rel="apple-touch-icon" sizes="180x180" href="asset/public/assets/img/favicons/apple-touch-icon.png">
-    <link rel="icon" type="image/png" sizes="32x32" href="asset/public/assets/img/favicons/favicon-32x32.png">
-    <link rel="icon" type="image/png" sizes="16x16" href="asset/public/assets/img/favicons/favicon-16x16.png">
-    <link rel="shortcut icon" type="image/x-icon" href="asset/public/assets/img/favicons/favicon.ico">
-    <link rel="manifest" href="asset/public/assets/img/favicons/manifest.json">
-    <meta name="msapplication-TileImage" content="asset/public/assets/img/favicons/mstile-150x150.png">
+    <link rel="apple-touch-icon" sizes="180x180"
+        href="{{ asset('asset/public/assets/img/favicons/apple-touch-icon.png') }}">
+    <link rel="icon" type="image/png" sizes="32x32"
+        href="{{ asset('asset/public/assets/img/favicons/favicon-32x32.png') }}">
+    <link rel="icon" type="image/png" sizes="16x16"
+        href="{{ asset('asset/public/assets/img/favicons/favicon-16x16.png') }}">
+    <link rel="shortcut icon" type="image/x-icon" href="{{ asset('asset/public/assets/img/favicons/favicon.ico') }}">
+    <link rel="manifest" href="{{ asset('asset/public/assets/img/favicons/manifest.json') }}">
+    <meta name="msapplication-TileImage" content="{{ asset('asset/public/assets/img/favicons/mstile-150x150.png') }}">
     <meta name="theme-color" content="#ffffff">
-    <script src="asset/public/assets/js/config.js"></script>
-    <script src="asset/public/vendors/overlayscrollbars/OverlayScrollbars.min.js"></script>
+    <script src="{{ asset('asset/public/assets/js/config.js') }}"></script>
+    <script src="{{ asset('asset/public/vendors/overlayscrollbars/OverlayScrollbars.min.js') }}"></script>
 
 
     <!-- ===============================================-->
@@ -31,11 +34,11 @@
     <link
         href="https://fonts.googleapis.com/css?family=Open+Sans:300,400,500,600,700%7cPoppins:300,400,500,600,700,800,900&amp;display=swap"
         rel="stylesheet">
-    <link href="asset/public/vendors/overlayscrollbars/OverlayScrollbars.min.css" rel="stylesheet">
-    <link href="asset/public/assets/css/theme-rtl.min.css" rel="stylesheet" id="style-rtl">
-    <link href="asset/public/assets/css/theme.min.css" rel="stylesheet" id="style-default">
-    <link href="asset/public/assets/css/user-rtl.min.css" rel="stylesheet" id="user-style-rtl">
-    <link href="asset/public/assets/css/user.min.css" rel="stylesheet" id="user-style-default">
+    <link href="{{ asset('asset/public/vendors/overlayscrollbars/OverlayScrollbars.min.css') }}" rel="stylesheet">
+    <link href="{{ asset('asset/public/assets/css/theme-rtl.min.css') }}" rel="stylesheet" id="style-rtl">
+    <link href="{{ asset('asset/public/assets/css/theme.min.css') }}" rel="stylesheet" id="style-default">
+    <link href="{{ asset('asset/public/assets/css/user-rtl.min.css') }}" rel="stylesheet" id="user-style-rtl">
+    <link href="{{ asset('asset/public/assets/css/user.min.css') }}" rel="stylesheet" id="user-style-default">
     <script>
         var isRTL = JSON.parse(localStorage.getItem('isRTL'));
         if (isRTL) {

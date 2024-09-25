@@ -21,6 +21,9 @@ Route::controller(RegisterController::class)->group(function () {
 
 Route::controller(ForgotController::class)->group(function () {
     Route::get('forgot', 'index');
+    Route::post('/forgot_password_post', 'submitForgotPasswordForm')->name('forgot.password.post');
+    Route::get('/reset_password/{token}', 'showResetPasswordForm')->name('reset.password.form');
+    Route::post('/reset_password_post', 'submitResetPasswordForm')->name('reset.password.post');
 });
 
 Route::middleware('auth')->group(function () {

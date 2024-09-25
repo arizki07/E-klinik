@@ -40,9 +40,18 @@
                                         </div>
                                         <div class="row justify-content-center">
                                             <div class="col-sm-8 col-md">
-                                                <form class="mb-3">
-                                                    <input class="form-control" type="email"
-                                                        placeholder="Email address" />
+                                                <form class="mb-3" action="{{ route('forgot.password.post') }}"
+                                                    method="POST" id="forgot">
+                                                    @csrf
+                                                    <input class="form-control" type="email" placeholder="Email address"
+                                                        name="email" id="email" />
+                                                    @error('email')
+                                                        <div class="alert alert_outlined alert_primary mt-5 mb-5">
+                                                            {{ $message }}
+                                                            <button type="button" class="dismiss la la-times"
+                                                                data-dismiss="alert"></button>
+                                                        </div>
+                                                    @enderror
                                                     <div class="mb-3"></div>
                                                     <button class="btn btn-primary d-block w-100 mt-3" type="submit"
                                                         name="submit">Send reset link</button>

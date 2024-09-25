@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Auth;
 
 use App\Http\Controllers\Controller;
+use App\Models\User;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -25,9 +26,19 @@ class AuthController extends Controller
         if ($validator->fails()) {
             return response()->json([
                 "status" => false,
-                "errors" => $validator->errors()
+                "errors" => $validator->errors()->all()
             ]);
         } else {
+            $user = User::where('email', $request->email)->first();
+
+            if ($user->status === 'inactive') {
+                return response()->json([
+                    "status" => false,
+                    "header" => "Account Inactive",
+                    "errors" => ["Your account is inactive. Please verify your account before logging in."]
+                ]);
+            }
+
             $rememberMe = $request->remember ? true : false;
             $up = $request->only(["email", "password"]);
 
@@ -40,11 +51,13 @@ class AuthController extends Controller
                 return response()->json([
                     "status" => false,
                     "header" => "Invalid credentials",
-                    "errors" => ["Cek Email & Password Anda"],
+                    "errors" => ["Check your email & password"]
                 ]);
             }
         }
     }
+
+
 
     public function logout(Request $request): RedirectResponse
     {

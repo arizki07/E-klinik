@@ -27,14 +27,12 @@ class RegisterController extends Controller
 
     public function actionRegist(Request $request)
     {
-        // Validate inputs
         $request->validate([
             'name' => 'required|string|max:255',
             'email' => 'required|string|email|max:255|unique:users',
             'password' => 'required|string|min:8|confirmed',
         ]);
 
-        // Create the user
         $user = User::create([
             'name' => $request->name,
             'email' => $request->email,
@@ -43,11 +41,9 @@ class RegisterController extends Controller
             'status' => 'inactive'
         ]);
 
-        // Generate OTP
-        $otp = rand(100000, 999999);  // 6-digit OTP
-        $expiresAt = Carbon::now()->addMinutes(5);  // OTP expires in 5 minutes
+        $otp = rand(100000, 999999);
+        $expiresAt = Carbon::now()->addMinutes(5);
 
-        // Save OTP to database
         Otp::create([
             'user_id' => $user->id,
             'otp' => $otp,
@@ -68,61 +64,48 @@ class RegisterController extends Controller
             return redirect()->back()->with('error', 'Mail sending failed.');
         }
 
-        // Store email in session for OTP verification
         Session::put('email', $request->email);
 
-        // Flash success message and redirect to OTP form
         Session::flash('message', 'OTP telah dikirim ke Email Anda. Silahkan cek Email Anda untuk verifikasi akun.');
-        return redirect()->route('otp.form'); // Redirect to OTP form
+        return redirect()->route('otp.form');
     }
 
     public function verifyOtp(Request $request)
     {
-        // Validate OTP input
         $request->validate([
             'otp' => 'required|numeric',
         ]);
 
-        // Retrieve the email from the session
         $email = Session::get('email');
 
-        // Debugging: Check if email is in session
         if (!$email) {
             return back()->with('error', 'Email session not found. Please try again.');
         }
 
-        // Find the user by email
         $user = User::where('email', $email)->first();
 
         if (!$user) {
             return back()->with('error', 'Email not found!');
         }
 
-        // Find the OTP record for the user
         $otpRecord = Otp::where('user_id', $user->id)->where('otp', $request->otp)->first();
 
         if (!$otpRecord) {
             return back()->with('error', 'Invalid OTP!');
         }
 
-        // Check if OTP has expired
         if (Carbon::now()->greaterThan($otpRecord->expires_at)) {
             return back()->with('error', 'OTP has expired!');
         }
 
-        // Activate the user and mark the email as verified
         $user->update([
             'email_verified_at' => now(),
             'status' => 'active'
         ]);
 
-        // Delete the OTP record after successful verification
         $otpRecord->delete();
-
-        // Clear the email from the session
         Session::forget('email');
 
-        // Redirect or show success message after verification
         return redirect('/')->with('success', 'Verification successful! Your account is now active.');
     }
 

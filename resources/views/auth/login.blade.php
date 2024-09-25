@@ -44,17 +44,21 @@
                                                 <h3>Account Login</h3>
                                             </div>
                                         </div>
-                                        @if (session('success'))
-                                            <div class="alert alert-success" role="alert">
-                                                {{ session('success') }}
-                                            </div>
-                                        @endif
+                                        <!-- Container untuk alert -->
+                                        <div id="alert-container">
+                                            @if (session('success'))
+                                                <div class="alert alert-success" role="alert">
+                                                    {{ session('success') }}
+                                                </div>
+                                            @endif
 
-                                        @if (session('error'))
-                                            <div class="alert alert-danger" role="alert">
-                                                {{ session('error') }}
-                                            </div>
-                                        @endif
+                                            @if (session('error'))
+                                                <div class="alert alert-danger" role="alert">
+                                                    {{ session('error') }}
+                                                </div>
+                                            @endif
+                                        </div>
+
                                         <form action="{{ route('log.authenticate') }}" method="post" name="handleAjax"
                                             id="handleAjax">
                                             @csrf
@@ -93,6 +97,7 @@
                                                     id="submitLogin">Log in</button>
                                             </div>
                                         </form>
+
                                         <div class="position-relative mt-4">
                                             <hr class="bg-300" />
                                             <div class="divider-content-center">or log in with</div>
@@ -119,12 +124,6 @@
     <script src="{{ asset('asset/public/jquery.validate.min.js') }}"></script>
     <script type="text/javascript">
         $(function() {
-            /*------------------------------------------==============================================================================================================================================================
-            --------------------------------------------==============================================================================================================================================================
-            Ajax Login
-            --------------------------------------------==============================================================================================================================================================
-            --------------------------------------------==============================================================================================================================================================*/
-
             if ($("#handleAjax").length > 0) {
                 $("#handleAjax").validate({
                     rules: {
@@ -145,12 +144,10 @@
                     },
 
                     submitHandler: function(form) {
-
                         $('#submitLogin').html(
                             '<span class="spinner-border spinner-border-sm me-2" role="status"></span> Please Wait<span class="animated-dots"></span>'
                         );
                         $("#submitLogin").attr("disabled", true);
-
 
                         $.ajax({
                             url: $(form).attr('action'),
@@ -159,41 +156,47 @@
                             dataType: 'json',
 
                             success: function(data) {
+                                // Hapus alert lama
+                                $("#alert-container").html("");
 
+                                // Jika sukses
                                 if (data.status) {
+                                    $("#alert-container").append(
+                                        '<div class="alert alert-success" role="alert">Login successful! Redirecting to dashboard...</div>'
+                                    );
                                     $('#submitLogin').html(
-                                        '<span class="spinner-border spinner-border-sm me-2" role="status"></span> Redirect to Dashboard<span class="animated-dots"></span>'
+                                        '<span class="spinner-border spinner-border-sm me-2" role="status"></span> Redirecting...'
                                     );
                                     window.location = data.redirect;
                                 } else {
-
+                                    // Jika gagal
                                     $('#submitLogin').html('Login');
                                     $("#submitLogin").attr("disabled", false);
-                                    $('#email').focus();
 
-                                    $(".alert").remove();
-                                    $.each(data.errors, function(key, val) {
-                                        $("#errors-list").append(
-                                            "<div class='alert  alert-danger alert-dismissible' role='alert'><div class='d-flex'><div><svg xmlns='http://www.w3.org/2000/svg' class='icon alert-icon' width='24' height='24' viewBox='0 0 24 24' stroke-width='2' stroke='currentColor' fill='none' stroke-linecap='round' stroke-linejoin='round'><path stroke='none' d='M0 0h24v24H0z' fill='none'></path><path d='M3 12a9 9 0 1 0 18 0a9 9 0 0 0 -18 0'></path><path d='M12 8v4'></path><path d='M12 16h.01'></path></svg></div><div><h4 class='alert-title'>" +
-                                            data.header +
-                                            "</h4><div class='text-secondary'>" +
-                                            val +
-                                            "</div></div></div><a class='btn-close' data-bs-dismiss='alert' aria-label='close'></a></div>"
-                                        );
-                                    });
+                                    // Tambahkan alert error
+                                    $("#alert-container").append(
+                                        '<div class="alert alert-danger" role="alert">' +
+                                        data.header + '<br>' + data.errors.join(
+                                        '<br>') + '</div>'
+                                    );
                                 }
-
                             },
+                            error: function(xhr, status, error) {
+                                // Hapus alert lama
+                                $("#alert-container").html("");
+
+                                $('#submitLogin').html('Login');
+                                $("#submitLogin").attr("disabled", false);
+
+                                // Tampilkan alert jika error dari server
+                                $("#alert-container").append(
+                                    '<div class="alert alert-danger" role="alert">An error occurred. Please try again.</div>'
+                                );
+                            }
                         });
                     }
-                })
+                });
             }
-
-            /*------------------------------------------==============================================================================================================================================================
-            --------------------------------------------==============================================================================================================================================================
-            End Ajax
-            --------------------------------------------==============================================================================================================================================================
-            --------------------------------------------==============================================================================================================================================================*/
         });
     </script>
 @endsection
