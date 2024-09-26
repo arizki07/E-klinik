@@ -17,10 +17,9 @@ class AntrianController extends Controller
     public function store(Request $request)
     {
         $request->validate([
-            'poli' => 'required|in:Poli Umum,Poli Gigi,Poli KB', // Sesuaikan dengan enum di database
+            'poli' => 'required|in:Poli Umum,Poli Gigi,Poli KB',
         ]);
 
-        // Logika untuk mengambil nomor antrian terbaru
         $poli = $request->input('poli');
         $lastAntrian = AntrianModel::where('service', $poli)->orderBy('created_at', 'desc')->first();
 
@@ -31,9 +30,8 @@ class AntrianController extends Controller
             $newNoAntrian = '001';
         }
 
-        // Simpan antrian baru ke database
         AntrianModel::create([
-            'nama_pasien' => Auth::user()->name, // Sesuaikan dengan logika yang diinginkan
+            'nama_pasien' => Auth::user()->name,
             'no_antrian' => $newNoAntrian,
             'service' => $poli,
             'status' => 'menunggu',

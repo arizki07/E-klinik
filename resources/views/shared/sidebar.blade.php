@@ -32,15 +32,14 @@
                     </div>
                     <a class="nav-link" href="#dashboard" aria-expanded="true" aria-controls="dashboard">
                         <div class="d-flex align-items-center"><span class="nav-link-icon"><span
-                                    class="fas fa-chart-pie"></span></span><span
-                                class="nav-link-text ps-1">Dashboard</span>
+                                    class="fas fa-home"></span></span><span class="nav-link-text ps-1">Dashboard</span>
                         </div>
                     </a>
                 </li>
                 <li class="nav-item">
                     <a class="nav-link" href="{{ url('users') }}" aria-expanded="true" aria-controls="dashboard">
                         <div class="d-flex align-items-center"><span class="nav-link-icon"><span
-                                    class="fas fa-chart-pie"></span></span><span class="nav-link-text ps-1">Users</span>
+                                    class="fas fa-user-cog"></span></span><span class="nav-link-text ps-1">Users</span>
                         </div>
                     </a>
                 </li>
@@ -55,14 +54,13 @@
                     </div>
                     <a class="nav-link" href="{{ url('daftar') }}" role="button" aria-expanded="false">
                         <div class="d-flex align-items-center"><span class="nav-link-icon"><span
-                                    class="fas fa-calendar-alt"></span></span><span
+                                    class="fas fa-upload"></span></span><span
                                 class="nav-link-text ps-1">Pendaftaran</span>
                         </div>
                     </a>
                     <a class="nav-link" href="{{ url('antrian') }}" role="button" aria-expanded="false">
                         <div class="d-flex align-items-center"><span class="nav-link-icon"><span
-                                    class="fas fa-calendar-alt"></span></span><span
-                                class="nav-link-text ps-1">Antrian</span>
+                                    class="fas fa-walking"></span></span><span class="nav-link-text ps-1">Antrian</span>
                         </div>
                     </a>
                 </li>
