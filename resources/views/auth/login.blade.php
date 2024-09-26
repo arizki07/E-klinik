@@ -19,16 +19,15 @@
 
                                         <div class="z-index-1 position-relative"><a
                                                 class="link-light mb-4 font-sans-serif fs-4 d-inline-block fw-bolder"
-                                                href="asset/public/index.html">falcon</a>
-                                            <p class="opacity-75 text-white">With the power of Falcon, you can now focus
-                                                only on functionaries for your digital products, while leaving the UI
-                                                design on us!</p>
+                                                href="/">E-KLINIK</a>
+                                            <p class="opacity-75 text-white">Selamat datang di aplikasi E-klinik, silahkan
+                                                lakukan login untuk menjalankan aplikasi!</p>
                                         </div>
                                     </div>
                                     <div class="mt-3 mb-4 mt-md-4 mb-md-5 light">
-                                        <p class="text-white">Don't have an account?<br><a
+                                        <p class="text-white">Silahkan lakukan registrasi!<br><a
                                                 class="text-decoration-underline link-light"
-                                                href="{{ route('register') }}">Get started!</a>
+                                                href="{{ route('register') }}">Register!</a>
                                         </p>
                                         <p class="mb-0 mt-4 mt-md-5 fs--1 fw-semi-bold text-white opacity-75">Read our
                                             <a class="text-decoration-underline text-white" href="#!">terms</a> and
@@ -177,7 +176,7 @@
                                     $("#alert-container").append(
                                         '<div class="alert alert-danger" role="alert">' +
                                         data.header + '<br>' + data.errors.join(
-                                        '<br>') + '</div>'
+                                            '<br>') + '</div>'
                                     );
                                 }
                             },

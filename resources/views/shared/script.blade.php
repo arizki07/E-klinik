@@ -24,3 +24,4 @@
 
 <script src="{{ asset('asset/public/datatables/Select-1.6.0/js/dataTables.select.min.js') }}"></script>
 <script src="{{ asset('asset/public/datatables/Select-1.6.0/js/select.dataTables.min.js') }}"></script>
+<script src="{{ asset('asset/public/sweetalert2/sweetalert2.min.js') }}" defer></script>

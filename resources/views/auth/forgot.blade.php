@@ -19,10 +19,9 @@
 
                                         <div class="z-index-1 position-relative"><a
                                                 class="link-light mb-4 font-sans-serif fs-4 d-inline-block fw-bolder"
-                                                href="asset/public/index.html">falcon</a>
-                                            <p class="opacity-75 text-white">With the power of Falcon, you can now focus
-                                                only on functionaries for your digital products, while leaving the UI design
-                                                on us!</p>
+                                                href="/">E-KLINIK</a>
+                                            <p class="opacity-75 text-white">Masukkan email jika anda melupakan password
+                                                anda, anda akan mendapatkan email untuk reset password!</p>
                                         </div>
                                     </div>
                                     <div class="mt-3 mb-4 mt-md-4 mb-md-5 light">

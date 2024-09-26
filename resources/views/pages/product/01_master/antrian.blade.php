@@ -1,5 +1,22 @@
 @extends('layouts.apps')
 @section('content')
+    <style>
+        .small-toast {
+            font-size: 12px;
+            padding: 10px;
+        }
+
+        td.cuspad0 {
+            padding-top: 1px;
+            padding-bottom: 1px;
+            padding-right: 13px;
+            padding-left: 13px;
+        }
+
+        td.cuspad1 {
+            text-transform: uppercase;
+        }
+    </style>
     <div class="d-flex mb-4 mt-3"><span class="fa-stack me-2 ms-n1"><i class="fas fa-circle fa-stack-2x text-300"></i>
             <i class="fa-inverse fa-stack-1x text-primary fas fa-percentage"></i></span>
         <div class="col">
@@ -52,8 +69,6 @@
             </div>
         </div>
     </div>
-
-
 
     {{-- table  --}}
     <div class="card z-index-1 mb-3 mt-3">
@@ -151,10 +166,12 @@
                     }
                 },
                 "columns": [{
+                        title: 'ACTION',
                         data: 'action',
                         name: 'action',
                         orderable: false,
                         searchable: false,
+                        className: "cuspad0 cuspad1 text-center clickable cursor-pointer"
                     },
                     {
                         title: 'NAME',
@@ -186,21 +203,41 @@
 
             /*-----------------------creat antrian------------------------ */
             $('.card-clickable').on('click', function() {
-                var poli = $(this).data('poli'); // Dapatkan nama poli dari data attribute
-
+                var poli = $(this).data('poli');
                 $.ajax({
                     url: '/antrian/create',
                     type: 'POST',
                     data: {
                         poli: poli,
-                        _token: '{{ csrf_token() }}' // Jika menggunakan Laravel CSRF Protection
+                        _token: '{{ csrf_token() }}'
                     },
                     success: function(response) {
-                        alert('Antrian untuk ' + poli + ' berhasil ditambahkan!');
-                        // Optionally, refresh atau update UI di sini
+                        Swal.fire({
+                            toast: true,
+                            position: 'top-end',
+                            icon: 'success',
+                            title: 'Berhasil menambahkan antrian, ' + poli + '',
+                            showConfirmButton: false,
+                            timer: 4000,
+                            timerProgressBar: true,
+                            customClass: {
+                                popup: 'small-toast'
+                            }
+                        }).then(() => {
+
+                            location.reload();
+                        });
                     },
                     error: function(response) {
-                        alert('Gagal menambahkan antrian!');
+                        Swal.fire({
+                            toast: true,
+                            position: 'top-end',
+                            icon: 'error',
+                            title: 'Gagal menambahkan antrian!',
+                            showConfirmButton: false,
+                            timer: 4000,
+                            timerProgressBar: true
+                        });
                     }
                 });
             });
