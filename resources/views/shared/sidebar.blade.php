@@ -58,7 +58,7 @@
                                 class="nav-link-text ps-1">Pendaftaran</span>
                         </div>
                     </a>
-                    <a class="nav-link" href="{{ url('antrian') }}" role="button" aria-expanded="false">
+                    <a class="nav-link" href="{{ url('antrian-index') }}" role="button" aria-expanded="false">
                         <div class="d-flex align-items-center"><span class="nav-link-icon"><span
                                     class="fas fa-walking"></span></span><span class="nav-link-text ps-1">Antrian</span>
                         </div>
