@@ -51,7 +51,7 @@ Route::middleware('auth')->group(function () {
     });
 
     Route::controller(AntrianController::class)->group(function () {
-        Route::get('antrian', 'antrian');
-        Route::post('/antrian/create', 'store');
+        Route::get('antrian-index', 'antrian');
+        Route::post('/create/store', 'store');
     });
 });
