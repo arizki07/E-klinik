@@ -1,61 +1,104 @@
 @extends('layouts.apps')
 @section('content')
-    <style>
-        td.cuspad0 {
-            padding-top: 10px;
-            padding-bottom: 10px;
-            padding-right: 13px;
-            padding-left: 13px;
-        }
-
-        td.cuspad1 {
-            text-transform: uppercase;
-        }
-    </style>
     <div class="d-flex mb-4 mt-3"><span class="fa-stack me-2 ms-n1"><i class="fas fa-circle fa-stack-2x text-300"></i>
             <i class="fa-inverse fa-stack-1x text-primary fas fa-percentage"></i></span>
         <div class="col">
             <h5 class="mb-0 text-primary position-relative mt-1">
-                <span class="bg-200 dark__bg-1100 pe-3">Master User &amp; Auth</span>
+                <span class="bg-200 dark__bg-1100 pe-3">Master &amp; Antrian</span>
                 <span class="border position-absolute top-50 translate-middle-y w-100 start-0 z-index--1"></span>
             </h5>
         </div>
     </div>
-    <div class="card z-index-1 mb-3">
-        <div class="card-header bg-header">
-            <div class="row flex-between-center">
-                <div class="col-6 col-sm-auto d-flex align-items-center pe-0">
-                    <h5 class="fs-0 mb-0 text-nowrap py-2 py-xl-0 text-black">Tabel </h5>
-                </div>
-                <div class="row flex-between-center">
-                    <div class="col-4 col-sm-auto ms-auto text-end">
-                        <div class="d-none" id="table-purchases-actions">
-                            <button class="btn btn-falcon-default text-danger btn-sm ms-2" type="button" id="btn-process">
-                                <span class="fas fa-trash fs--1 text-danger" data-bs-toggle="modal"
-                                    data-bs-target="#deleteModal" style="margin-right: 5px;"></span>Proses Hapus
-                            </button>
-                        </div>
 
-                        <div id="table-purchases-replace-element" class="d-flex align-items-center">
-                            <a class="btn btn-falcon-default btn-sm" type="button" href="#">
-                                <span class="fas fa-plus" data-fa-transform="shrink-3 down-2"></span>
-                                <span class="d-none d-sm-inline-block ms-1">New</span>
-                            </a>
-                            <button class="btn btn-falcon-default btn-sm mx-2" type="button">
-                                <span class="fas fa-filter" data-fa-transform="shrink-3 down-2"></span>
-                                <span class="d-none d-sm-inline-block ms-1">Filter</span>
-                            </button>
-                        </div>
-                    </div>
+    <div class="row g-3 mb-3">
+        <div class="col-md-6 col-xxl-3">
+            <div class="card h-lg-100">
+                <div class="bg-holder bg-card"
+                    style="background-image:url(asset/public/assets/img/icons/spot-illustrations/corner-1.png);">
                 </div>
+                <!--/.bg-holder-->
 
+                <div class="card-body position-relative">
+                    <h5 class="text-warning">Running out of your space?</h5>
+                    <p class="fs--1 mb-0">Your storage will be running out soon. Get more space and
+                        powerful productivity features.</p><a class="btn btn-link fs--1 text-warning mt-lg-3 ps-0"
+                        href="#!">Upgrade
+                        storage<span class="fas fa-chevron-right ms-1" data-fa-transform="shrink-4 down-1"></span></a>
+                </div>
             </div>
         </div>
-        <hr>
+        <div class="col-md-6 col-xxl-3">
+            <div class="card h-lg-100">
+                <div class="bg-holder bg-card"
+                    style="background-image:url(asset/public/assets/img/icons/spot-illustrations/corner-2.png);">
+                </div>
+                <!--/.bg-holder-->
+
+                <div class="card-body position-relative">
+                    <h5 class="text-warning">Running out of your space?</h5>
+                    <p class="fs--1 mb-0">Your storage will be running out soon. Get more space and
+                        powerful productivity features.</p><a class="btn btn-link fs--1 text-warning mt-lg-3 ps-0"
+                        href="#!">Upgrade
+                        storage<span class="fas fa-chevron-right ms-1" data-fa-transform="shrink-4 down-1"></span></a>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-6 col-xxl-3">
+            <div class="card h-lg-100">
+                <div class="bg-holder bg-card"
+                    style="background-image:url(asset/public/assets/img/icons/spot-illustrations/corner-3.png);">
+                </div>
+                <!--/.bg-holder-->
+
+                <div class="card-body position-relative">
+                    <h5 class="text-warning">Running out of your space?</h5>
+                    <p class="fs--1 mb-0">Your storage will be running out soon. Get more space and
+                        powerful productivity features.</p><a class="btn btn-link fs--1 text-warning mt-lg-3 ps-0"
+                        href="#!">Upgrade
+                        storage<span class="fas fa-chevron-right ms-1" data-fa-transform="shrink-4 down-1"></span></a>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-6 col-xxl-3">
+            <div class="card h-lg-100">
+                <div class="bg-holder bg-card"
+                    style="background-image:url(asset/public/assets/img/icons/spot-illustrations/corner-4.png);">
+                </div>
+                <!--/.bg-holder-->
+
+                <div class="card-body position-relative">
+                    <h5 class="text-warning">Running out of your space?</h5>
+                    <p class="fs--1 mb-0">Your storage will be running out soon. Get more space and
+                        powerful productivity features.</p><a class="btn btn-link fs--1 text-warning mt-lg-3 ps-0"
+                        href="#!">Upgrade
+                        storage<span class="fas fa-chevron-right ms-1" data-fa-transform="shrink-4 down-1"></span></a>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    {{-- Form  --}}
+    <div class="card z-index-1 mb-3 mt-3">
+
+        <form class="row g-3">
+            <div class="col-md-6">
+                <label class="form-label" for="inputEmail4">Nama</label>
+                <input class="form-control" id="inputEmail4" type="text" name="nama_pasien" />
+            </div>
+            <div class="col-md-6">
+                <label class="form-label" for="inputPassword4">No Antrian</label>
+                <input class="form-control" id="inputPassword4" type="text" name="no_antrian" />
+            </div>
+            <div class="col-12">
+                <button class="btn btn-primary" type="submit">Sign in</button>
+            </div>
+        </form>
+    </div>
+    <div class="card z-index-1 mb-3 mt-3">
         <div class="card-body px-3 py-3">
             <div class="table-responsive">
                 <table style="width:100%; height: 100%;font-size:13px;"
-                    class="table table-bordered table-vcenter card-table table-hover text-nowrap datatable datatable-users">
+                    class="table table-bordered table-vcenter card-table table-hover text-nowrap datatable datatable-antrian">
                 </table>
             </div>
         </div>
@@ -91,7 +134,7 @@
         }
 
         $(document).ready(function() {
-            var tableUsers = $('.datatable-users').DataTable({
+            var tableAntrian = $('.datatable-antrian').DataTable({
                 "processing": true,
                 "serverSide": false,
                 "scrollX": false,
@@ -106,10 +149,6 @@
                     ['Default', '10', '25', '50', 'Semua']
                 ],
                 "buttons": [{
-                        extend: 'collection',
-                        text: 'Selection',
-                        buttons: ['selectAll', 'selectNone']
-                    }, {
                         extend: 'copyHtml5',
                         className: 'btn btn-teal',
                         text: '<i class="fa fa-copy text-white"></i> Copy',
@@ -142,61 +181,35 @@
                         "next": '<svg xmlns="http://www.w3.org/2000/svg" class="icon" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round"><path stroke="none" d="M0 0h24h24H0z" fill="none"></path><path d="M9 6l6 6l-6 6"></path></svg>',
                         "previous": '<svg xmlns="http://www.w3.org/2000/svg" class="icon" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round"><path stroke="none" d="M0 0h24h24H0z" fill="none"></path><path d="M15 6l-6 6l6 6"></path></svg>',
                     },
-                    "select": {
-                        rows: {
-                            _: "%d item dipilih ",
-                            0: "Pilih item dan tekan tombol Proses data untuk memproses Email ",
-                        }
-                    },
                 },
                 "ajax": {
-                    "url": "{{ route('getUsers.index') }}",
+                    "url": "{{ route('getAntrian.index') }}",
                     "data": function(data) {
                         data._token = "{{ csrf_token() }}";
                     }
                 },
-                "initComplete": function(settings, json) {
-                    $('html').removeClass('cursor-wait');
-                },
-                columnDefs: [{
-                    'targets': 0,
-                    "orderable": false,
-                    'className': 'select-checkbox',
-                    'checkboxes': {
-                        'selectRow': true
-                    },
-                }],
-                select: {
-                    'style': 'multi',
-                    // "selector": 'td:not(:nth-child(2))',
-                },
                 "columns": [{
-                        data: 'select_orders',
-                        name: 'select_orders',
-                        className: 'select-checkbox',
+                        data: 'action',
+                        name: 'action',
                         orderable: false,
                         searchable: false,
-                        extend: 'selectAll',
-                        selectorModifier: {
-                            search: 'applied'
-                        }
                     },
                     {
                         title: 'NAME',
-                        data: 'name',
-                        name: 'name',
+                        data: 'nama_pasien',
+                        name: 'nama_pasien',
                         className: "cuspad0 cuspad1 text-center clickable cursor-pointer"
                     },
                     {
-                        title: 'EMAIL',
-                        data: 'email',
-                        name: 'email',
+                        title: 'NO ANTRIAN',
+                        data: 'no_antrian',
+                        name: 'no_antrian',
                         className: "cuspad0 cuspad1 text-center clickable cursor-pointer"
                     },
                     {
-                        title: 'ROLE',
-                        data: 'roles',
-                        name: 'roles',
+                        title: 'SERVICE',
+                        data: 'service',
+                        name: 'service',
                         className: "cuspad0 cuspad1 text-center cursor-pointer"
                     },
                     {
@@ -204,12 +217,6 @@
                         data: 'status',
                         name: 'status',
                         className: "cuspad0 clickable cursor-pointer"
-                    },
-                    {
-                        title: '',
-                        data: 'action',
-                        name: 'action',
-                        className: "cuspad0 clickable cursor-pointer",
                     },
                 ],
 

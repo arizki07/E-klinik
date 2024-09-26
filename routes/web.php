@@ -1,11 +1,21 @@
 <?php
 
 use App\Http\Controllers\_00_Home\UsersController;
+use App\Http\Controllers\_01_master\AntrianController;
+use App\Http\Controllers\_01_Master\Pendaftaran;
 use App\Http\Controllers\Auth\AuthController;
 use App\Http\Controllers\Auth\ForgotController;
 use App\Http\Controllers\Auth\RegisterController;
 use App\Http\Controllers\DashboardController;
+use App\Http\Controllers\Datatables\AntrianList;
+use App\Http\Controllers\Datatables\PendaftaranList;
+use App\Http\Controllers\Datatables\UsersList;
 use Illuminate\Support\Facades\Route;
+
+
+Route::resource('getUsers', UsersList::class);
+Route::resource('getPendaftaran', PendaftaranList::class);
+Route::resource('getAntrian', AntrianList::class);
 
 Route::controller(AuthController::class)->group(function () {
     Route::get('/', 'index');
@@ -33,6 +43,14 @@ Route::middleware('auth')->group(function () {
     });
 
     Route::controller(UsersController::class)->group(function () {
-        Route::get('users', 'index');
+        Route::get('users', 'users');
+    });
+
+    Route::controller(Pendaftaran::class)->group(function () {
+        Route::get('daftar', 'pendaftaran');
+    });
+
+    Route::controller(AntrianController::class)->group(function () {
+        Route::get('antrian', 'antrian');
     });
 });

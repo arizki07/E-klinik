@@ -55,7 +55,7 @@
         <div class="card-body px-3 py-3">
             <div class="table-responsive">
                 <table style="width:100%; height: 100%;font-size:13px;"
-                    class="table table-bordered table-vcenter card-table table-hover text-nowrap datatable datatable-users">
+                    class="table table-bordered table-vcenter card-table table-hover text-nowrap datatable datatable-pendaftaran">
                 </table>
             </div>
         </div>
@@ -91,7 +91,7 @@
         }
 
         $(document).ready(function() {
-            var tableUsers = $('.datatable-users').DataTable({
+            var tablePendaftaran = $('.datatable-pendaftaran').DataTable({
                 "processing": true,
                 "serverSide": false,
                 "scrollX": false,
@@ -106,10 +106,6 @@
                     ['Default', '10', '25', '50', 'Semua']
                 ],
                 "buttons": [{
-                        extend: 'collection',
-                        text: 'Selection',
-                        buttons: ['selectAll', 'selectNone']
-                    }, {
                         extend: 'copyHtml5',
                         className: 'btn btn-teal',
                         text: '<i class="fa fa-copy text-white"></i> Copy',
@@ -142,74 +138,60 @@
                         "next": '<svg xmlns="http://www.w3.org/2000/svg" class="icon" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round"><path stroke="none" d="M0 0h24h24H0z" fill="none"></path><path d="M9 6l6 6l-6 6"></path></svg>',
                         "previous": '<svg xmlns="http://www.w3.org/2000/svg" class="icon" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round"><path stroke="none" d="M0 0h24h24H0z" fill="none"></path><path d="M15 6l-6 6l6 6"></path></svg>',
                     },
-                    "select": {
-                        rows: {
-                            _: "%d item dipilih ",
-                            0: "Pilih item dan tekan tombol Proses data untuk memproses Email ",
-                        }
-                    },
                 },
                 "ajax": {
-                    "url": "{{ route('getUsers.index') }}",
+                    "url": "{{ route('getPendaftaran.index') }}",
                     "data": function(data) {
                         data._token = "{{ csrf_token() }}";
                     }
                 },
-                "initComplete": function(settings, json) {
-                    $('html').removeClass('cursor-wait');
-                },
-                columnDefs: [{
-                    'targets': 0,
-                    "orderable": false,
-                    'className': 'select-checkbox',
-                    'checkboxes': {
-                        'selectRow': true
-                    },
-                }],
-                select: {
-                    'style': 'multi',
-                    // "selector": 'td:not(:nth-child(2))',
-                },
                 "columns": [{
-                        data: 'select_orders',
-                        name: 'select_orders',
-                        className: 'select-checkbox',
+                        data: 'action',
+                        name: 'action',
                         orderable: false,
                         searchable: false,
-                        extend: 'selectAll',
-                        selectorModifier: {
-                            search: 'applied'
-                        }
                     },
                     {
                         title: 'NAME',
-                        data: 'name',
-                        name: 'name',
+                        data: 'nama_pasien',
+                        name: 'nama_pasien',
                         className: "cuspad0 cuspad1 text-center clickable cursor-pointer"
                     },
                     {
-                        title: 'EMAIL',
-                        data: 'email',
-                        name: 'email',
+                        title: 'KTP',
+                        data: 'ktp',
+                        name: 'ktp',
                         className: "cuspad0 cuspad1 text-center clickable cursor-pointer"
                     },
                     {
-                        title: 'ROLE',
-                        data: 'roles',
-                        name: 'roles',
+                        title: 'TANGGAL LAHIR',
+                        data: 'tgl_lahir',
+                        name: 'tgl_lahir',
                         className: "cuspad0 cuspad1 text-center cursor-pointer"
                     },
                     {
-                        title: 'STATUS',
-                        data: 'status',
-                        name: 'status',
+                        title: 'ALAMAT',
+                        data: 'alamat',
+                        name: 'alamat',
                         className: "cuspad0 clickable cursor-pointer"
                     },
                     {
-                        title: '',
-                        data: 'action',
-                        name: 'action',
-                        className: "cuspad0 clickable cursor-pointer",
+                        title: 'NO HP',
+                        data: 'no_tlpn',
+                        name: 'no_tlpn',
+                        className: "cuspad0 clickable cursor-pointer"
+                    },
+                    {
+                        title: 'JENIS',
+                        data: 'jenis_pasien',
+                        name: 'jenis_pasien',
+                        className: "cuspad0 clickable cursor-pointer"
+                    },
+                    {
+                        title: 'BPJS',
+                        data: 'bpjs_status',
+                        name: 'bpjs_status',
+                        className: "cuspad0 clickable cursor-pointer"
                     },
                 ],
 

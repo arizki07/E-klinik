@@ -7,12 +7,12 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use Yajra\DataTables\DataTables;
 
-class UsersList extends Controller
+class PendaftaranList extends Controller
 {
     public function index(Request $request)
     {
         if ($request->ajax()) {
-            $data = DB::table('users');
+            $data = DB::table('pendaftaran');
             return DataTables::of($data)
                 ->addIndexColumn()
                 ->addColumn('action', function ($row) {
@@ -40,29 +40,8 @@ class UsersList extends Controller
                         </div>';
                     return $btn;
                 })
-                ->addColumn('status', function ($row) {
-                    return $this->getStatusBadge($row->status);
-                })
-
-                ->editColumn('select_orders', function ($row) {
-                    return '';
-                })
-                ->rawColumns(['action', 'select_orders', 'status', 'tgl'])
+                ->rawColumns(['action'])
                 ->make(true);
-        }
-
-        return view('pages.product.00_home.users');
-    }
-
-    private function getStatusBadge($status)
-    {
-        switch ($status) {
-            case 'inactive':
-                return '<span class="badge rounded-pill bg-danger">Inactive</span>';
-            case 'active':
-                return '<span class="badge rounded-pill bg-success">Active</span>';
-            default:
-                return '<span class="badge rounded-pill bg-dark">Default</span>';
         }
     }
 }

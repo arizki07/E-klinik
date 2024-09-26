@@ -23,6 +23,13 @@
         <div class="navbar-vertical-content scrollbar">
             <ul class="navbar-nav flex-column mb-3" id="navbarVerticalNav">
                 <li class="nav-item">
+                    <div class="row navbar-vertical-label-wrapper mt-3 mb-2">
+                        <div class="col-auto navbar-vertical-label">Home
+                        </div>
+                        <div class="col ps-0">
+                            <hr class="mb-0 navbar-vertical-divider" />
+                        </div>
+                    </div>
                     <a class="nav-link" href="#dashboard" aria-expanded="true" aria-controls="dashboard">
                         <div class="d-flex align-items-center"><span class="nav-link-icon"><span
                                     class="fas fa-chart-pie"></span></span><span
@@ -40,17 +47,22 @@
                 <li class="nav-item">
                     <!-- label-->
                     <div class="row navbar-vertical-label-wrapper mt-3 mb-2">
-                        <div class="col-auto navbar-vertical-label">App
+                        <div class="col-auto navbar-vertical-label">Master
                         </div>
                         <div class="col ps-0">
                             <hr class="mb-0 navbar-vertical-divider" />
                         </div>
                     </div>
-                    <!-- parent pages--><a class="nav-link" href="app/calendar.html" role="button"
-                        aria-expanded="false">
+                    <a class="nav-link" href="{{ url('daftar') }}" role="button" aria-expanded="false">
                         <div class="d-flex align-items-center"><span class="nav-link-icon"><span
                                     class="fas fa-calendar-alt"></span></span><span
-                                class="nav-link-text ps-1">Calendar</span>
+                                class="nav-link-text ps-1">Pendaftaran</span>
+                        </div>
+                    </a>
+                    <a class="nav-link" href="{{ url('antrian') }}" role="button" aria-expanded="false">
+                        <div class="d-flex align-items-center"><span class="nav-link-icon"><span
+                                    class="fas fa-calendar-alt"></span></span><span
+                                class="nav-link-text ps-1">Antrian</span>
                         </div>
                     </a>
                 </li>
