@@ -18,7 +18,7 @@ Route::resource('getPendaftaran', PendaftaranList::class);
 Route::resource('getAntrian', AntrianList::class);
 
 Route::controller(AuthController::class)->group(function () {
-    Route::get('/', 'index');
+    Route::get('/', 'index')->name('login');
     Route::post('login', 'authenticate')->name('log.authenticate');
     Route::get('logout', 'logout');
 });
@@ -52,5 +52,6 @@ Route::middleware('auth')->group(function () {
 
     Route::controller(AntrianController::class)->group(function () {
         Route::get('antrian', 'antrian');
+        Route::post('/antrian/create', 'store');
     });
 });

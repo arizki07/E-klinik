@@ -15,7 +15,7 @@ return new class extends Migration
             $table->id();
             $table->string('nama_pasien');
             $table->string('no_antrian');
-            $table->enum('service', ['Poli Umum', 'Poli Gigi', 'Poli KB']); //poli umum, poli gigi, poli KB
+            $table->string('service');
             $table->enum('status', ['Menunggu', 'proses', 'selesai'])->default('menunggu');
             $table->timestamps();
         });

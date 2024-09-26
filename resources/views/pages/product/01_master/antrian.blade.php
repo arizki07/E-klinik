@@ -12,88 +12,50 @@
 
     <div class="row g-3 mb-3">
         <div class="col-md-6 col-xxl-3">
-            <div class="card h-lg-100">
+            <div class="card h-lg-100 card-clickable" data-poli="Poli Umum">
                 <div class="bg-holder bg-card"
-                    style="background-image:url(asset/public/assets/img/icons/spot-illustrations/corner-1.png);">
-                </div>
-                <!--/.bg-holder-->
-
+                    style="background-image:url(asset/public/assets/img/icons/spot-illustrations/corner-1.png);"></div>
                 <div class="card-body position-relative">
-                    <h5 class="text-warning">Running out of your space?</h5>
-                    <p class="fs--1 mb-0">Your storage will be running out soon. Get more space and
-                        powerful productivity features.</p><a class="btn btn-link fs--1 text-warning mt-lg-3 ps-0"
-                        href="#!">Upgrade
-                        storage<span class="fas fa-chevron-right ms-1" data-fa-transform="shrink-4 down-1"></span></a>
+                    <h5 class="text-warning"><i class="fas fa-hospital"></i> POLI UMUM</h5>
+                    <p class="fs--1 mb-0">Klik untuk mendaftar antrian Poli Umum</p>
                 </div>
             </div>
         </div>
         <div class="col-md-6 col-xxl-3">
-            <div class="card h-lg-100">
+            <div class="card h-lg-100 card-clickable" data-poli="Poli Gigi">
                 <div class="bg-holder bg-card"
-                    style="background-image:url(asset/public/assets/img/icons/spot-illustrations/corner-2.png);">
-                </div>
-                <!--/.bg-holder-->
-
+                    style="background-image:url(asset/public/assets/img/icons/spot-illustrations/corner-2.png);"></div>
                 <div class="card-body position-relative">
-                    <h5 class="text-warning">Running out of your space?</h5>
-                    <p class="fs--1 mb-0">Your storage will be running out soon. Get more space and
-                        powerful productivity features.</p><a class="btn btn-link fs--1 text-warning mt-lg-3 ps-0"
-                        href="#!">Upgrade
-                        storage<span class="fas fa-chevron-right ms-1" data-fa-transform="shrink-4 down-1"></span></a>
+                    <h5 class="text-warning"><i class="fas fa-tooth"></i> POLI GIGI</h5>
+                    <p class="fs--1 mb-0">Klik untuk mendaftar antrian Poli Gigi</p>
                 </div>
             </div>
         </div>
         <div class="col-md-6 col-xxl-3">
-            <div class="card h-lg-100">
+            <div class="card h-lg-100 card-clickable" data-poli="Poli KB">
                 <div class="bg-holder bg-card"
-                    style="background-image:url(asset/public/assets/img/icons/spot-illustrations/corner-3.png);">
-                </div>
-                <!--/.bg-holder-->
-
+                    style="background-image:url(asset/public/assets/img/icons/spot-illustrations/corner-3.png);"></div>
                 <div class="card-body position-relative">
-                    <h5 class="text-warning">Running out of your space?</h5>
-                    <p class="fs--1 mb-0">Your storage will be running out soon. Get more space and
-                        powerful productivity features.</p><a class="btn btn-link fs--1 text-warning mt-lg-3 ps-0"
-                        href="#!">Upgrade
-                        storage<span class="fas fa-chevron-right ms-1" data-fa-transform="shrink-4 down-1"></span></a>
+                    <h5 class="text-warning"><i class="fas fa-female"></i> POLI KB</h5>
+                    <p class="fs--1 mb-0">Klik untuk mendaftar antrian Poli KB</p>
                 </div>
             </div>
         </div>
         <div class="col-md-6 col-xxl-3">
-            <div class="card h-lg-100">
+            <div class="card h-lg-100 card-clickable" data-poli="Poli Mata">
                 <div class="bg-holder bg-card"
-                    style="background-image:url(asset/public/assets/img/icons/spot-illustrations/corner-4.png);">
-                </div>
-                <!--/.bg-holder-->
-
+                    style="background-image:url(asset/public/assets/img/icons/spot-illustrations/corner-3.png);"></div>
                 <div class="card-body position-relative">
-                    <h5 class="text-warning">Running out of your space?</h5>
-                    <p class="fs--1 mb-0">Your storage will be running out soon. Get more space and
-                        powerful productivity features.</p><a class="btn btn-link fs--1 text-warning mt-lg-3 ps-0"
-                        href="#!">Upgrade
-                        storage<span class="fas fa-chevron-right ms-1" data-fa-transform="shrink-4 down-1"></span></a>
+                    <h5 class="text-warning"><i class="fas fa-eye"></i> POLI MATA</h5>
+                    <p class="fs--1 mb-0">Klik untuk mendaftar antrian Poli Mata</p>
                 </div>
             </div>
         </div>
     </div>
 
-    {{-- Form  --}}
-    <div class="card z-index-1 mb-3 mt-3">
 
-        <form class="row g-3">
-            <div class="col-md-6">
-                <label class="form-label" for="inputEmail4">Nama</label>
-                <input class="form-control" id="inputEmail4" type="text" name="nama_pasien" />
-            </div>
-            <div class="col-md-6">
-                <label class="form-label" for="inputPassword4">No Antrian</label>
-                <input class="form-control" id="inputPassword4" type="text" name="no_antrian" />
-            </div>
-            <div class="col-12">
-                <button class="btn btn-primary" type="submit">Sign in</button>
-            </div>
-        </form>
-    </div>
+
+    {{-- table  --}}
     <div class="card z-index-1 mb-3 mt-3">
         <div class="card-body px-3 py-3">
             <div class="table-responsive">
@@ -220,6 +182,27 @@
                     },
                 ],
 
+            });
+
+            /*-----------------------creat antrian------------------------ */
+            $('.card-clickable').on('click', function() {
+                var poli = $(this).data('poli'); // Dapatkan nama poli dari data attribute
+
+                $.ajax({
+                    url: '/antrian/create',
+                    type: 'POST',
+                    data: {
+                        poli: poli,
+                        _token: '{{ csrf_token() }}' // Jika menggunakan Laravel CSRF Protection
+                    },
+                    success: function(response) {
+                        alert('Antrian untuk ' + poli + ' berhasil ditambahkan!');
+                        // Optionally, refresh atau update UI di sini
+                    },
+                    error: function(response) {
+                        alert('Gagal menambahkan antrian!');
+                    }
+                });
             });
         });
     </script>

@@ -20,6 +20,7 @@
     <link rel="manifest" href="asset/public/assets/img/favicons/manifest.json">
     <meta name="msapplication-TileImage" content="asset/public/assets/img/favicons/mstile-150x150.png">
     <meta name="theme-color" content="#ffffff">
+    <meta name="csrf-token" content="{{ csrf_token() }}">
     <script src="asset/public/assets/js/config.js"></script>
     <script src="asset/public/vendors/overlayscrollbars/OverlayScrollbars.min.js"></script>
 
