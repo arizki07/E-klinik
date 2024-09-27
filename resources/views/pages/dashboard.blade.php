@@ -9,11 +9,9 @@
                 <!--/.bg-holder-->
 
                 <div class="card-body position-relative">
-                    <h5 class="text-warning">Running out of your space?</h5>
-                    <p class="fs--1 mb-0">Your storage will be running out soon. Get more space and
-                        powerful productivity features.</p><a class="btn btn-link fs--1 text-warning mt-lg-3 ps-0"
-                        href="#!">Upgrade
-                        storage<span class="fas fa-chevron-right ms-1" data-fa-transform="shrink-4 down-1"></span></a>
+                    <h5 class="text-warning">Selamat datang {{ Auth::user()->name }} - E-KLINIK</h5>
+                    <p class="fs--1 mb-0">Silahkan pilih menu di samping untuk menjalankan aplikasi, gunakan aplikasi dengan
+                        bijak.</p>
                 </div>
             </div>
         </div>

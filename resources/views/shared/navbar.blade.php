@@ -1,3 +1,31 @@
+<style>
+    .badge-animate {
+        animation: pulse 1.5s infinite;
+        /* Menambahkan animasi pada badge */
+    }
+
+    @keyframes pulse {
+        0% {
+            transform: scale(1);
+            opacity: 0.8;
+        }
+
+        50% {
+            transform: scale(1.1);
+            opacity: 1;
+        }
+
+        100% {
+            transform: scale(1);
+            opacity: 0.8;
+        }
+    }
+
+    .notification-icon {
+        margin-left: auto;
+        padding-left: 110px;
+    }
+</style>
 <nav class="navbar navbar-light navbar-glass navbar-top navbar-expand">
 
     <button class="btn navbar-toggler-humburger-icon navbar-toggler me-1 me-sm-3" type="button" data-bs-toggle="collapse"
@@ -159,13 +187,6 @@
                         class="fas fa-moon fs-0"></span></label>
             </div>
         </li>
-        <li class="nav-item">
-            <a class="nav-link px-0 notification-indicator notification-indicator-warning notification-indicator-fill fa-icon-wait"
-                href="app/e-commerce/shopping-cart.html"><span class="fas fa-shopping-cart"
-                    data-fa-transform="shrink-7" style="font-size: 33px;"></span><span
-                    class="notification-indicator-number">1</span></a>
-
-        </li>
         <li class="nav-item dropdown">
             <a class="nav-link notification-indicator notification-indicator-primary px-0 fa-icon-wait"
                 id="navbarDropdownNotification" href="#" role="button" data-bs-toggle="dropdown"
@@ -186,44 +207,55 @@
                     <div class="scrollbar-overlay" style="max-height:19rem">
                         <div class="list-group list-group-flush fw-normal fs--1">
                             <div class="list-group-title border-bottom">NEW</div>
-                            <div class="list-group-item">
-                                <a class="notification notification-flush notification-unread" href="#!">
-                                    <div class="notification-avatar">
-                                        <div class="avatar avatar-2xl me-3">
-                                            <img class="rounded-circle" src="asset/public/assets/img/team/1-thumb.png"
-                                                alt="" />
+                            <div class="list-group-item" id="notification-container">
+                                {{-- content --}}
+                                <script>
+                                    document.addEventListener('DOMContentLoaded', function() {
+                                        // Mengambil notifikasi dari server
+                                        fetch('/notifications')
+                                            .then(response => response.json())
+                                            .then(data => {
+                                                const container = document.getElementById('notification-container');
+                                                container.innerHTML = ''; // Bersihkan container sebelum menambah elemen baru
 
-                                        </div>
-                                    </div>
-                                    <div class="notification-body">
-                                        <p class="mb-1"><strong>Emma Watson</strong> replied to your
-                                            comment : "Hello world 😍"</p>
-                                        <span class="notification-time"><span class="me-2" role="img"
-                                                aria-label="Emoji">💬</span>Just
-                                            now</span>
+                                                // Iterasi melalui data pengguna untuk menampilkan notifikasi
+                                                data.forEach(user => {
+                                                    // Mengambil hanya tanggal dari created_at
+                                                    const createdAt = new Date(user.created_at).toLocaleDateString();
 
-                                    </div>
-                                </a>
-
-                            </div>
-                            <div class="list-group-item">
-                                <a class="notification notification-flush notification-unread" href="#!">
-                                    <div class="notification-avatar">
-                                        <div class="avatar avatar-2xl me-3">
-                                            <div class="avatar-name rounded-circle"><span>AB</span>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div class="notification-body">
-                                        <p class="mb-1"><strong>Albert Brooks</strong> reacted to
-                                            <strong>Mia Khalifa's</strong> status
-                                        </p>
-                                        <span class="notification-time"><span
-                                                class="me-2 fab fa-gratipay text-danger"></span>9hr</span>
-
-                                    </div>
-                                </a>
-
+                                                    // Membuat elemen HTML untuk notifikasi
+                                                    const notificationHTML = `
+                                                        <div class="list-group-item d-flex justify-content-between align-items-center">
+                                                            <a class="notification notification-flush notification-unread" href="#!">
+                                                                <div class="notification-avatar d-flex align-items-center">
+                                                                    <div class="avatar avatar-2xl me-3">
+                                                                        <!-- Inisial nama pengguna di dalam avatar -->
+                                                                        <div class="avatar-name rounded-circle">
+                                                                            <span>${user.name.charAt(0)}</span>
+                                                                        </div>
+                                                                    </div>
+                                                                    <div class="notification-body">
+                                                                        <p class="mb-1">
+                                                                            <strong>${user.name}</strong>
+s                                                                        </p>
+                                                                        <span class="badge bg-success badge-animate">Active</span> 
+                                                                        <span class="notification-time">${createdAt}</span>
+                                                                    </div>
+                                                                </div>
+                                                                <!-- Ikon notifikasi di sebelah kanan -->
+                                                                <div class="notification-icon">
+                                                                    <span class="fa fa-bell text-primary"></span>
+                                                                </div>
+                                                            </a>
+                                                        </div>
+                                                    `;
+                                                    // Tambahkan notifikasi ke container
+                                                    container.innerHTML += notificationHTML;
+                                                });
+                                            })
+                                            .catch(error => console.error('Error fetching notifications:', error));
+                                    });
+                                </script>
                             </div>
                             <div class="list-group-title border-bottom">EARLIER</div>
                             <div class="list-group-item">
@@ -291,7 +323,6 @@
                             href="app/social/notifications.html">View all</a></div>
                 </div>
             </div>
-
         </li>
         <li class="nav-item dropdown"><a class="nav-link pe-0" id="navbarDropdownUser" href="#"
                 role="button" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">

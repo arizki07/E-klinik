@@ -30,7 +30,7 @@
                             <hr class="mb-0 navbar-vertical-divider" />
                         </div>
                     </div>
-                    <a class="nav-link" href="#dashboard" aria-expanded="true" aria-controls="dashboard">
+                    <a class="nav-link" href="{{ url('dashboard') }}" aria-expanded="true" aria-controls="dashboard">
                         <div class="d-flex align-items-center"><span class="nav-link-icon"><span
                                     class="fas fa-home"></span></span><span class="nav-link-text ps-1">Dashboard</span>
                         </div>
@@ -58,7 +58,7 @@
                                 class="nav-link-text ps-1">Pendaftaran</span>
                         </div>
                     </a>
-                    <a class="nav-link" href="{{ url('antrian-index') }}" role="button" aria-expanded="false">
+                    <a class="nav-link" href="{{ url('antrian') }}" role="button" aria-expanded="false">
                         <div class="d-flex align-items-center"><span class="nav-link-icon"><span
                                     class="fas fa-walking"></span></span><span class="nav-link-text ps-1">Antrian</span>
                         </div>

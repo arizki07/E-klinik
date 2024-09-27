@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\_00_Home\UsersController;
+use App\Http\Controllers\_01_Master\Antrian;
 use App\Http\Controllers\_01_master\AntrianController;
 use App\Http\Controllers\_01_Master\Pendaftaran;
 use App\Http\Controllers\Auth\AuthController;
@@ -40,6 +41,8 @@ Route::controller(ForgotController::class)->group(function () {
 Route::middleware('auth')->group(function () {
     Route::controller(DashboardController::class)->group(function () {
         Route::get('dashboard', 'index');
+        // Route untuk mengambil notifikasi
+        Route::get('/notifications', 'getNotifications')->name('notifications');
     });
 
     Route::controller(UsersController::class)->group(function () {
@@ -50,8 +53,10 @@ Route::middleware('auth')->group(function () {
         Route::get('daftar', 'pendaftaran');
     });
 
-    Route::controller(AntrianController::class)->group(function () {
-        Route::get('antrian-index', 'antrian');
+    Route::controller(AntrianController::class)->group(function () {});
+
+    Route::controller(Antrian::class)->group(function () {
+        Route::get('antrian', 'antrian');
         Route::post('/create/store', 'store');
     });
 });
