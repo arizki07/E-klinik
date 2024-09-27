@@ -2,7 +2,6 @@
 
 use App\Http\Controllers\_00_Home\UsersController;
 use App\Http\Controllers\_01_Master\Antrian;
-use App\Http\Controllers\_01_master\AntrianController;
 use App\Http\Controllers\_01_Master\Pendaftaran;
 use App\Http\Controllers\Auth\AuthController;
 use App\Http\Controllers\Auth\ForgotController;
@@ -53,10 +52,9 @@ Route::middleware('auth')->group(function () {
         Route::get('daftar', 'pendaftaran');
     });
 
-    Route::controller(AntrianController::class)->group(function () {});
 
     Route::controller(Antrian::class)->group(function () {
-        Route::get('antrian', 'antrian');
+        Route::get('antrian', 'antr')->name('view.atr');
         Route::post('/create/store', 'store');
     });
 });

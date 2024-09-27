@@ -9,7 +9,7 @@ use Illuminate\Support\Facades\Auth;
 
 class Antrian extends Controller
 {
-    public function antrian()
+    public function antr()
     {
         return view('pages.product.01_master.antrian');
     }
